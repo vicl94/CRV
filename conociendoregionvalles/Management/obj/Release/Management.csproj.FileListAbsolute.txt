@@ -1,0 +1,10 @@
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\bin\Management.dll.config
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\bin\Management.dll
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\bin\Management.pdb
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\bin\AllPages.dll
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\bin\DataAccess.dll
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\bin\AllPages.pdb
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\bin\DataAccess.pdb
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\obj\Release\Management.csprojResolveAssemblyReference.cache
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\obj\Release\Management.dll
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\obj\Release\Management.pdb

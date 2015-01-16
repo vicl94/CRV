@@ -1,0 +1,5 @@
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\AllPages\bin\AllPages.dll.config
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\AllPages\bin\AllPages.dll
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\AllPages\bin\AllPages.pdb
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\AllPages\obj\Debug\AllPages.dll
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\AllPages\obj\Debug\AllPages.pdb

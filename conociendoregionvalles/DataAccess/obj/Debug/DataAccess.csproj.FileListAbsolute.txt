@@ -1,0 +1,8 @@
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\DataAccess\bin\DataAccess.dll.config
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\DataAccess\bin\DataAccess.dll
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\DataAccess\bin\DataAccess.pdb
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\DataAccess\bin\AllPages.dll
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\DataAccess\bin\AllPages.pdb
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\DataAccess\obj\Debug\DataAccess.dll
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\DataAccess\obj\Debug\DataAccess.pdb
