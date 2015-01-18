@@ -111,5 +111,13 @@ namespace AllPages
             get { return Pack; }
             set { Pack = value; }
         }
+        private List<Video> Videos;
+
+        public List<Video> IVideos
+        {
+            get { return Videos; }
+            set { Videos = value; }
+        }
+        
     }
 }

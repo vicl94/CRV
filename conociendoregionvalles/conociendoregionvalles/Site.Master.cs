@@ -71,7 +71,7 @@ namespace conociendoregionvalles
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblEmpresa.Text = "CONOCIENDO REGION VALLES";
+            lblEmpresa.Text = "CRV";
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

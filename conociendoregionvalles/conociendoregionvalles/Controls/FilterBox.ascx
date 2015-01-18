@@ -1,5 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FilterBox.ascx.cs" Inherits="conociendoregionvalles.Controls.FilterBox" %>
- <div class="ui search">
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FilterBox.ascx.cs" Inherits="conociendoregionvalles.Controls.FilterBox" %> 
+<div class="ui search" align="center">
   <div class="ui icon input">
     <input class="prompt" type="text" placeholder="BUSCAR..." runat="server" ClientIdMode="Static" id="txtSearch" onkeydown="if (window.event.keyCode == 13) 
 {
@@ -15,7 +15,7 @@
 </div>
            <div id="listregions" runat="server" >
            </div>
-<div class="divfilter"></div>
+
 <div>
 <h5>Regiones</h5>
  <select class="form-control" id="selectRegion" runat="server"  ClientIdMode="Static">

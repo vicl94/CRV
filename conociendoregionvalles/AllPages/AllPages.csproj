@@ -64,7 +64,6 @@
     <Compile Include="EmpresaResumen.cs" />
     <Compile Include="FiltroEmpresas.cs" />
     <Compile Include="ListadoClass.cs" />
-    <Compile Include="OdbcMembershipUser.cs" />
     <Compile Include="Paginacion.cs" />
     <Compile Include="Pagos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +71,7 @@
     <Compile Include="Usuario.cs" />
     <Compile Include="SystemClass.cs" />
     <Compile Include="Tags.cs" />
+    <Compile Include="Video.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">

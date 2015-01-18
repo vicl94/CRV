@@ -6,13 +6,17 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title><%: Page.Title %> - CRV</title>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="css/video-js.min.css" rel="stylesheet" />
+    <link href="css/video-js.css" rel="stylesheet" />
+   <script src="Scripts/mediaelement-and-player.min.js"></script>
+    <link href="css/mediaelementplayer.css" rel="stylesheet" />
     <script src="Scripts/bootstrap-confirmation.js"></script>
     <script src="Scripts/bootstrap-select.js"></script>
     <script src="Scripts/semantic.js"></script>

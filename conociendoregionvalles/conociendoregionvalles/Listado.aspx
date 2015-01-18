@@ -8,14 +8,12 @@
     </script>--%>
     <script src="Scripts/jquery.simplePagination.js"></script>
     <link href="css/simplePagination.css" rel="stylesheet" />
-    <div class="ui grid">
-  <div class="three wide column">
-    <div class="ui segment">
-       <uc1:FilterBox runat="server" id="FilterBox1" />
-    </div>
-  </div>
-  <div class="ten wide column">
-    <div class="ui segment" >
+<div class="row">
+        <div class="col-md-2">
+            <uc1:FilterBox runat="server" id="FilterBox1" />
+            <div class="divfilter"></div>
+        </div>
+    <div class="col-md-8">
         <%--<div class="jumbotron" style="background-color:#303030;background-image:none;">--%>
             <asp:UpdatePanel ID="panelEmpresas" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
@@ -31,12 +29,12 @@
                         </ul>
                     </nav>--%>
       <%--  </div>--%>
+        </div>
     </div>
-  </div>
 <%--  <div class="three wide column">
     <div class="ui segment"><b>Column Three</b> Donec semper mollis condimentum. Aenean eget rutrum magna. Mauris ornare nibh scelerisque turpis lobortis dignissim. Etiam eleifend justo eget quam semper vulputate. Nulla et risus convallis velit molestie iaculis. Aliquam erat volutpat. </div>
   </div>--%>
-</div>
+
 
     
     <script>

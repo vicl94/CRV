@@ -76,3 +76,4 @@ C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\con
 C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\conociendoregionvalles\obj\Debug\conociendoregionvalles.csproj.GenerateResource.Cache
 C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\conociendoregionvalles\obj\Debug\conociendoregionvalles.dll
 C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\conociendoregionvalles\obj\Debug\conociendoregionvalles.pdb
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\conociendoregionvalles\bin\NReco.VideoConverter.dll

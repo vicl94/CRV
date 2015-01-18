@@ -5,10 +5,11 @@
     }
 </style>
 <div class="TableContainer" >
+    <div class="table-responsive">    
                 <table >
                     <tr>
-                        <td rowspan="7" style="width: 200px; height:200px; border-bottom-left-radius:24px;">
-                            <asp:Image ID="img" runat="server" class="imagecontainer" src="Images/company_building3.jpg"/>
+                        <td rowspan="7" style="height:150px; width:150px; border-bottom-left-radius:24px;">
+                            <asp:Image ID="img" runat="server" src="Images/company_building3.jpg" CssClass="imagecontainer"/>
                         </td>
                         <td colspan="6" style="height: 15px;">
                              <asp:Label ID="lblNombre" runat="server" Text="Nombre"></asp:Label>
@@ -62,4 +63,5 @@
                         </td>
                     </tr>
                 </table>
+         </div>
             </div>

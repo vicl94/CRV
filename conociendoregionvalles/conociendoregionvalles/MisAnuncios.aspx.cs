@@ -23,6 +23,7 @@ namespace conociendoregionvalles
     {
         public string json;
         public string jsonPayments;
+        public string jsonVideos;
         public string idCompany;
         ManagementFilter ManagementObjF = new ManagementFilter();
         protected void Page_Load(object sender, EventArgs e)
@@ -68,7 +69,14 @@ namespace conociendoregionvalles
             RegEmp.ITelefono = txtTelefono.Text;
             RegEmp.IUserId = Context.User.Identity.GetUserId();
             RegEmp.IPack = int.Parse(HPaq.Value);
-            if (RegEmp.IPack == 2)
+            if (RegEmp.IPack == 1)
+            {
+                RegEmp.IResumen = String.Empty;
+                RegEmp.IMoreSummary = String.Empty;
+                RegEmp.ILatitude = String.Empty;
+                RegEmp.ILongitude = String.Empty;
+            }
+            if (RegEmp.IPack == 2 || RegEmp.IPack == 3)
             {
                 if (FileUpload1.HasFile)
                 {
@@ -80,17 +88,14 @@ namespace conociendoregionvalles
                 RegEmp.IMoreSummary = txtMoreSummary.Value;
                 RegEmp.ILatitude = HLatitude.Value;
                 RegEmp.ILongitude = HLongitude.Value;
+                if (RegEmp.IPack == 3)
+                {
+                    RegEmp.IVideos = new JavaScriptSerializer().Deserialize<List<Video>>(HJsonVideo.Value);
+                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + RegEmp.IVideos[0].Url + "')", true);
+                }
             }
-            else
-            {
-                RegEmp.IResumen = String.Empty;
-                RegEmp.IMoreSummary = String.Empty;
-                RegEmp.ILatitude = String.Empty;
-                RegEmp.ILongitude = String.Empty;
-            }
-
-            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + RegEmp.IPack + "')", true);
-            mensaje=ManagementObj.insertNewCompany(RegEmp);
+            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Name: " + RegEmp.IVideos[0].IName +" URL: "+ RegEmp.IVideos[0].IUrl + "')", true);
+            mensaje = ManagementObj.insertNewCompany(RegEmp);
             getAddbyUser();
         
         }
@@ -144,8 +149,10 @@ namespace conociendoregionvalles
             if (id == null) { Response.Redirect("~/Default.aspx"); }
             var listado = ManagementObjU.getEnterpriseByUser(id);
             var listadoPagos = ManagementObjC.getPaymentsByUser(id);
+            var listadoVideos = ManagementObjC.getVideosByUser(id);
             json = new JavaScriptSerializer().Serialize(listado);
             jsonPayments = new JavaScriptSerializer().Serialize(listadoPagos);
+            jsonVideos = new JavaScriptSerializer().Serialize(listadoPagos);
         }
 
         protected void PayPalBtn_Click(object sender, ImageClickEventArgs e)

@@ -21,6 +21,7 @@ namespace Management
             }
             return mensaje;
         }
+        
         public string UpdateCompany(Empresa Company)
         {
             string mensaje;
@@ -43,9 +44,18 @@ namespace Management
         {
             return DataAccessObj.getCompanyById(Id);
         }
+        public List<Video> getVideosByAdd(int Id)
+        {
+            return DataAccessObj.getVideosByAdd(Id);
+        }
+        
         public List<Pagos> getPaymentsByUser(string IdUser)
         {
             return DataAccessObj.getPaymentsByAdd(IdUser);
+        }
+        public List<Video> getVideosByUser(string IdUser)
+        {
+            return DataAccessObj.getVideosByUser(IdUser);
         }
     }
 }

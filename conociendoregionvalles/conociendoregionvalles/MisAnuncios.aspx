@@ -119,13 +119,12 @@
                 </asp:UpdatePanel>
                 
                     <!-- Modal -->
-                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="myModal">
-                  <div class="modal-dialog modal-lg" style="top: 40%; width:1000px; background-color:white;">
-                      <div class="modal-header">
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="myModal" style="top:10%">
+                      <div class="modal-content">
+                          <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h3 id="myModalLabel">Detalle de pagos</h3>
                       </div>
-                      <div class="modal-body">
                           <h4><asp:Label ID="txtCompanyNamePayment" runat="server" Text="Add"  ClientIdMode="Static"></asp:Label></h4>
                         <table id="paymentsTable" class="table table-striped">
                                   <thead>
@@ -159,16 +158,15 @@
                           <div align="right">
                               <button type="button" class="btn btn-success" id="btnPay">PAGAR</button>
                           </div>
-                      </div>
-                      <div class="modal-footer">
+                           <div class="modal-footer">
                         <%--<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>--%>
                         <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">CERRAR</button>
                       </div>
-                    </div>
+                      </div>
+                     
                     </div>
                 <%--  --%>
-                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalregisting">
-                  <div class="modal-dialog modal-lg" style="top: 40%; width:1000px" id="modalregisting1">
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalregisting" style="top:10%;">
                     <div class="modal-content" id="modalregisting2">
                         <form class="form-horizontal">
                         <fieldset>
@@ -183,18 +181,26 @@
                                 <div class="checkbox">
                                   <label><input type="checkbox" value="2" name="paq">BASICO</label>
                                 </div>
-                                <div class="checkbox disabled">
-                                  <label><input type="checkbox" value="3" disabled name="paq">AVANZADO</label>
+                                <div class="checkbox">
+                                  <label><input type="checkbox" value="3" name="paq">AVANZADO</label>
                                 </div>
                             </div> 
                               </div>
                             <div id="infBasic" align="center" style="display:none;">
-                                <h4><span class="label label-warning">Recuerda que el paquete BÁSICO tiene un costo 
+                                <h4><span class="label-warning control-label">Recuerda que el paquete BÁSICO tiene un costo 
                                 y tu anuncio no será visible hasta que realices el pago correspondiente.
                                  </span></h4></div>
                             <div class="row">
                                 <div class="col-md-offset-1 col-md-3">
+                                    <div align="center">
                                                 <asp:Image ID="ImgLogo" runat="server" CssClass="imagecontainer" ClientIdMode="Static"  ImageUrl="~/Images/img_no_disp_es.jpg" />
+                                 </div>
+                                        <div class="row" id="upImg" style="display:none;">
+                               <div class="col-md-offset-1 col-md-3">
+                                     <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" ClientIdMode="Static" />
+                                 </div>
+        
+                            </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -238,7 +244,6 @@
                                             </div>
                                         </div>
                                      <a href="#ModalSol" data-toggle="modal")>¿No se encuentra tu comunidad o categoria?... Click aquí</a>
-                                    <%--<a href="http://www.conociendoregionvalles.com/conociendoregionvalles/AltaComCat">¿No se encuentra tu comunidad o categoria?... Click aquí</a>--%>
                                  </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -250,14 +255,6 @@
                                         </div>
                                  </div>
                              </div>
-
-
-                            <div class="row" id="upImg" style="display:none;">
-                               <div class="col-md-offset-1 col-md-3">
-                                     <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" ClientIdMode="Static" />
-                                 </div>
-        
-                            </div>
                         <div class="row" id="Basic" style="display:none;">
                             <div class="col-md-offset-1 col-md-10">
                                  <div class="form-group">
@@ -282,10 +279,51 @@
                                 </div>
                             </div>
                             </div>
+                            <div class="row" id="Advance" style="display:none;">
+                                <div class="col-md-offset-1 col-md-10">
+                                    <h3>Agregar videos</h3>
+                                    <div class="row clearfix">
+			                                <table class="table table-bordered table-hover" id="tab_logic" data-toggle="table" data-url="data.json">
+				                                <thead>
+					                                <tr >
+						                                <th class="text-center">
+							                                #
+						                                </th>
+						                                <th class="text-center">
+							                                Nombre
+						                                </th>
+						                                <th class="text-center">
+							                                Url
+						                                </th>
+					                                </tr>
+				                                </thead>
+				                                <tbody>
+					                                <tr id='addr0'>
+						                                <td>
+						                                1
+						                                </td>
+						                                <td>
+						                                <input type="text" name='name'  placeholder='Nombre' class="form-control"/>
+						                                </td>
+						                                <td>
+						                                <input type="text" name='url' placeholder='Url' class="form-control"/>
+						                                </td>
+					                                </tr>
+                                                    <tr id='addr1'></tr>
+				                                </tbody>
+			                                </table>
+	                                </div>
+	                                <a id='delete_row' class="pull-right btn btn-default">Eliminar fila</a><a id="add_row" class="btn btn-primary pull-right">Agregar fila</a>
+                                </div>
+                                </div>
                             <div class="row">
                                <div align="center">
                                     <asp:Button runat="server" ID="RegistingAdd" Text="REGISTRAR" ClientIdMode="Static" OnClick="RegistingAdd_Click" CssClass="btn btn-primary" />       
                                     <asp:Button ID="UpdateAdd" runat="server" Text="MODIFICAR" ClientIdMode="Static" OnClick="UpdateAdd_Click" CssClass="btn btn-primary" />
+                                   <div class="modal-footer">
+                                    <%--<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>--%>
+                                    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">CERRAR</button>
+                                  </div>
                                </div>
                                 <div style="height:20px"></div>
                             </div>
@@ -293,15 +331,14 @@
                         </form>
                     </div>
                   </div>
-                </div>
+                
                        <!-- Modal -->
-                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="ModalSol">
-                  <div class="modal-dialog modal-lg" style="top: 40%; width:500px; background-color:white;">
-                      <div class="modal-header">
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="ModalSol" style="top:10%">
+                      <div class="modal-content">
+                          <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h3>Alta de comunidad o categoria</h3>
                       </div>
-                      <div class="modal-body">
                          <style>
                             .form-control{
                                 width:250px;
@@ -319,13 +356,12 @@
                         <button type="button" class="btn btn-primary" id="btnSendSol" data-dismiss="modal">Enviar solicitud</button>
                           <div style="height:10px"></div>
                           <h4>O mandanos un correo a <b>soporte@conociendoregionvalles.com</b> solicitando el alta de comunidad o categoria</h4>
-
-                      </div>
-                      <div class="modal-footer">
+                          <div class="modal-footer">
                         <%--<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>--%>
                         <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">CERRAR</button>
                       </div>
-                    </div>
+                      </div>
+                      
                     </div>
                 <%--  --%>
                 </section>
@@ -335,6 +371,7 @@
     <asp:HiddenField ID="HPaq" runat="server" ClientIdMode="Static"/>
     <asp:HiddenField ID="HLatitude" runat="server" ClientIdMode="Static" />
     <asp:HiddenField ID="HLongitude" runat="server" ClientIdMode="Static" />
+    <asp:HiddenField ID="HJsonVideo" runat="server" ClientIdMode="Static" />
 <script>
     var array;
     var arrayPay;
@@ -343,7 +380,20 @@
         //__doPostBack('pnlRegistrarEmpresa', JSON.stringify({ INombre: $("#txtCompanyName").val(), ITelefono: $("#txtTelefono").val(), IDomicilio: $("#txtDomicilio").val(), ICorreo: $("#txtCorreo").val(), IRegion: $("#selectRegion").val(), ITag: $("#selectTag").val(), IResumen: $("#txtResumen").val(), Iimgsrc: $("#FileUpload1").val().split('\\').pop() }));
     });
     $("#RegistingAdd").click(function () {
-        //alert($("#FileUpload1").val().split('\\').pop());
+        var jsonArr = [];
+        $('#tab_logic tbody tr').each(function() 
+        {
+            var name = $(this).find("input[name='name']").val();
+            var url = $(this).find("input[name='url']").val();
+            jsonArr.push({
+                IName: name,
+                IUrl:url
+            });
+        });
+        jsonArr.pop();
+        $("#HJsonVideo").val(JSON.stringify(jsonArr));
+        //alert(JSON.stringify(jsonArr));
+        //});
         //__doPostBack('pnlRegistrarEmpresa', JSON.stringify({ INombre: $("#txtCompanyName").val(), ITelefono: $("#txtTelefono").val(), IDomicilio: $("#txtDomicilio").val(), ICorreo: $("#txtCorreo").val(), IRegion: $("#selectRegion").val(), ITag: $("#selectTag").val(), IResumen: $("#txtResumen").val(), Iimgsrc: $("#FileUpload1").val().split('\\').pop() }));
     });
     $("#FileUpload1").change(function () {
@@ -365,9 +415,35 @@
         window.location.href = link;
     }
     $(document).ready(function () {
-        tableAdd();  
+        tableAdd();
         $("#HPaq").val(1);
+        var i=1;
+        $("#add_row").click(function(){
+            $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name' type='text' placeholder='Nombre' class='form-control input-md'  /> </td><td><input  name='url' type='text' placeholder='Url'  class='form-control input-md'></td>");
+
+            $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+            i++; 
+        });
+        $("#delete_row").click(function(){
+            if(i>1){
+                $("#addr"+(i-1)).html('');
+                i--;
+            }
+        });
     });
+    function getvideos(){
+        $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name' type='text' placeholder='Nombre' class='form-control input-md'  /> </td><td><input  name='url' type='text' placeholder='Url'  class='form-control input-md'></td>");
+        var table=$("#tab_logic").find('tbody');
+        i=1;
+        table.find('tr').remove();
+        //table.append($('<tr>')
+        //            .append($('<td>').append(i))
+        //            .append($('<td>')
+        //                .append($('<input>')
+                            
+        //            ))
+        //);
+    }
     function tableAdd() {
         array = <%=this.json%>;
         arrayPay = <%=this.jsonPayments%>;
@@ -387,9 +463,12 @@
             if(array[c].IPack==1){
                 classPack="ui blue huge label";
                 pack = "GRATIS";
-            }else{
+            }if(array[c].IPack==2){
                 classPack="ui purple huge label";
                 pack = "BASICO";
+            }if(array[c].IPack==3){
+                classPack="ui black huge label";
+                pack = "AVANZADO";
             }
             table.append($('<tr>')
                     .append($('<td>').append(array[c].INombre))
@@ -438,9 +517,16 @@
             $("#Basic").hide();
             $("#upImg").hide();
             $("#infBasic").hide();
-        }else{
+            $("#Advance").hide();
+        }if(array[sender.getAttribute('value')].IPack==2){
             $("#Basic").show();
             $("#upImg").show();
+            $("#Advance").hide();
+        }
+        if(array[sender.getAttribute('value')].IPack==3){
+            $("#Basic").show();
+            $("#upImg").show();
+            $("#Advance").show();
         }
         $("#HId").val(array[sender.getAttribute('value')].IId);
         $(".modal-content #txtCompanyName").val( array[sender.getAttribute('value')].INombre);
@@ -458,14 +544,15 @@
         $(".modal-content #UpdateAdd").show();
         resizeMap();
         loadCoord();
+        //getvideos();
     }
     function pagos(sender){
         $("#paycode").hide();
-        $(".modal-body #code").html("RCRV"+array[sender.getAttribute('value')].IId);
-        $(".modal-body #paymentsTable tbody tr").remove();
-        var tablePay=$(".modal-body #paymentsTable").find('tbody');
+        $(".modal-content #code").html("RCRV"+array[sender.getAttribute('value')].IId);
+        $(".modal-content #paymentsTable tbody tr").remove();
+        var tablePay=$(".modal-content #paymentsTable").find('tbody');
         $("#HId").val(array[sender.getAttribute('value')].IId);
-        $(".modal-body #txtCompanyNamePayment").html(array[sender.getAttribute('value')].INombre);
+        $(".modal-content #txtCompanyNamePayment").html(array[sender.getAttribute('value')].INombre);
         //alert(JSON.stringify(arrayPay));
         for(var c=0;c<arrayPay.length;c++){
             if($("#HId").val()==parseInt(arrayPay[c].IIdEmpresa)){
@@ -533,10 +620,15 @@
                 var control = $("#FileUpload1");
                 control.replaceWith( control = control.clone( true ) );
                 $("#ImgLogo").fadeIn("fast").attr('src', 'Images/img_no_disp_es.jpg');
-            }else{
+            }if($(this).attr("value")==2){
                 $("#Basic").show();
                 $("#upImg").show();
                 $("#infBasic").show();
+            }if($(this).attr("value")==3){
+                $("#Basic").show();
+                $("#upImg").show();
+                $("#infBasic").show();
+                $("#Advance").show();
             }
             $("#HPaq").val($(this).attr("value"));
             resizeMap();
@@ -545,7 +637,7 @@
             
         }
     });
-
+    
 </script>
 
 </asp:Content>

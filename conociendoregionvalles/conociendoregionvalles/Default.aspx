@@ -24,17 +24,49 @@
 <script type="text/javascript" src="http://counter1.allfreecounter.com/private/countertab.js?c=9b21e19313945f7c5ab522f9e18ec016"></script>
     </div>
     <div class="row">
-      <div class="containercenter banner">
-            <ul>
-                <li>
-                    <img src="Images/home.jpg" width="850" height="350" />
-                    
-                <li>
-                   <img src="Images/Untitled-1.jpg" width="850" height="400"/> </li>
-                <li>
-                    <img src="Images/CRV%20LOGO.png" width="900" /></li>
-            </ul>
+        <div class="container-fluid">
+<style type="text/css">
+.item{
+    background: #333;    
+    text-align: center;
+}
+.carousel{
+    margin-top: 20px;
+}
+.bs-example{
+	margin: 20px;
+}
+</style>
+ <div class="bs-example">
+    <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
+    	<!-- Carousel indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>   
+       <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div class="active item">
+                <img src="Images/home.jpg" class="img-responsive" style="height:inherit; margin:0 auto;"/>
+            </div>
+            <div class="item">
+                <img src="Images/Untitled-1.jpg" class="img-responsive" style="height:inherit; margin:0 auto;"/>
+            </div>
+            <div class="item">
+               <img src="Images/CRV%20LOGO.png" class="img-responsive" style="height:inherit; margin:0 auto;"/>
+            </div>
         </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</div>
+            </div>
         </div>
     <div class="row">
         <div class="col-md-4">
@@ -67,4 +99,5 @@
             </p>
         </div>
     </div>
+
 </asp:Content>

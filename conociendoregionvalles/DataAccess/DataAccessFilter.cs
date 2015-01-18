@@ -16,7 +16,7 @@ namespace DataAccess
         
        public List<Region> getAllRegions()
        {
-           List<Region> Regiones = new List<Region>();
+            List<Region> Regiones = new List<Region>();
             SqlDataReader rdr = null;
             string connStr = ConfigurationManager.ConnectionStrings["ConnDataBase"].ConnectionString;
             SqlConnection conn = new SqlConnection(connStr);

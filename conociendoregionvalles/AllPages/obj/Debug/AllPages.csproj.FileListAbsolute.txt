@@ -3,3 +3,4 @@ C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\All
 C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\AllPages\bin\AllPages.pdb
 C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\AllPages\obj\Debug\AllPages.dll
 C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\AllPages\obj\Debug\AllPages.pdb
+C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\AllPages\obj\Debug\AllPages.csprojResolveAssemblyReference.cache
