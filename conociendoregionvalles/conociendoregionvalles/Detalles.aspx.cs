@@ -16,8 +16,10 @@ namespace conociendoregionvalles
     {
         ManagementCompany ManagementObj = new ManagementCompany();
         Empresa EmpDetails = new Empresa();
-        List<Video> listaVideos = new List<Video>();
-        public string jsonVideos;
+        List<File> listaVideos = new List<File>();
+        List<File> listaArchivos = new List<File>();
+        public string jsonFiles;
+        public string jsonImages;
         protected void Page_Load(object sender, EventArgs e)
         {
             divAdvance.Visible = false;
@@ -34,7 +36,9 @@ namespace conociendoregionvalles
             HLatitude.Value = EmpDetails.ILatitude;
             HLongitude.Value = EmpDetails.ILongitude;
             listaVideos = ManagementObj.getVideosByAdd(id);
-            jsonVideos = new JavaScriptSerializer().Serialize(listaVideos);
+            listaArchivos = ManagementObj.getFilesByAdd(id);
+            jsonFiles = new JavaScriptSerializer().Serialize(listaVideos);
+            jsonImages = new JavaScriptSerializer().Serialize(listaArchivos);
             if (EmpDetails.IPack == 3)
             {
                 divAdvance.Visible = true;

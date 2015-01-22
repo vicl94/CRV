@@ -148,6 +148,15 @@ namespace conociendoregionvalles {
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txtMoreSummary;
         
         /// <summary>
+        /// Control FileUploadMedia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadMedia;
+        
+        /// <summary>
         /// Control RegistingAdd.
         /// </summary>
         /// <remarks>

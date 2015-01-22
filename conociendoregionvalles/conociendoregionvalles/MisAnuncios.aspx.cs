@@ -90,7 +90,30 @@ namespace conociendoregionvalles
                 RegEmp.ILongitude = HLongitude.Value;
                 if (RegEmp.IPack == 3)
                 {
-                    RegEmp.IVideos = new JavaScriptSerializer().Deserialize<List<Video>>(HJsonVideo.Value);
+                    if (FileUploadMedia.HasFiles)
+                    {
+                        foreach (HttpPostedFile uploadedFile in FileUploadMedia.PostedFiles)
+                        {
+
+                            File temp = new File();
+                            Guid UniqueIDMedia = Guid.NewGuid();
+                            ext = System.IO.Path.GetExtension(uploadedFile.FileName);
+                            uploadedFile.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Files/"),
+                            UniqueIDMedia.ToString()+ext));
+                            temp.IUrl = "Files/"+UniqueIDMedia.ToString();
+                            temp.IExt = ext;
+                            temp.IName = UniqueIDMedia.ToString();
+                            switch (ext)
+                            {
+                                case ".mp3": temp.IFileType = "Audio"; break;
+                                case ".jpg": temp.IFileType = "Image"; break;
+                                case ".jpeg": temp.IFileType = "Image"; break;
+                                case ".png": temp.IFileType = "Image"; break;
+                            }
+                            RegEmp.IFiles.Add(temp);
+                        }
+                    }
+                    RegEmp.IVideos = new JavaScriptSerializer().Deserialize<List<File>>(HJsonVideo.Value);
                     //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + RegEmp.IVideos[0].Url + "')", true);
                 }
             }
@@ -124,14 +147,36 @@ namespace conociendoregionvalles
             {
                 RegEmp.Iimgsrc = "NC";
             }
-          
+            if (FileUploadMedia.HasFiles)
+            {
+                foreach (HttpPostedFile uploadedFile in FileUploadMedia.PostedFiles)
+                {
+
+                    File temp = new File();
+                    Guid UniqueIDMedia = Guid.NewGuid();
+                    ext = System.IO.Path.GetExtension(uploadedFile.FileName);
+                    uploadedFile.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Files/"),
+                    UniqueIDMedia.ToString() + ext));
+                    temp.IUrl = "Files/" + UniqueIDMedia.ToString();
+                    temp.IExt = ext;
+                    temp.IName = UniqueIDMedia.ToString();
+                    switch (ext)
+                    {
+                        case ".mp3": temp.IFileType = "Audio"; break;
+                        case ".jpg": temp.IFileType = "Image"; break;
+                        case ".jpeg": temp.IFileType = "Image"; break;
+                        case ".png": temp.IFileType = "Image"; break;
+                    }
+                    RegEmp.IFiles.Add(temp);
+                }
+            }
             RegEmp.IRegion = selectRegion.Value.ToString();
             RegEmp.ITag = selectTag.Value.ToString();
             RegEmp.ITelefono = txtTelefono.Text;
             RegEmp.IUserId = Context.User.Identity.GetUserId();
+            RegEmp.IVideos = new JavaScriptSerializer().Deserialize<List<File>>(HJsonVideo.Value);
             mensaje = ManagementObj.UpdateCompany(RegEmp);
             getAddbyUser();
-         
         }
 
         protected void deleteAdd_Click(object sender, EventArgs e)
@@ -152,7 +197,7 @@ namespace conociendoregionvalles
             var listadoVideos = ManagementObjC.getVideosByUser(id);
             json = new JavaScriptSerializer().Serialize(listado);
             jsonPayments = new JavaScriptSerializer().Serialize(listadoPagos);
-            jsonVideos = new JavaScriptSerializer().Serialize(listadoPagos);
+            jsonVideos = new JavaScriptSerializer().Serialize(listadoVideos);
         }
 
         protected void PayPalBtn_Click(object sender, ImageClickEventArgs e)

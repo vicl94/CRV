@@ -4,6 +4,8 @@
 <%@ Register assembly="Artem.Google" namespace="Artem.Google.UI" tagprefix="artem" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="Scripts/fileinput.js"></script>
+    <link href="css/fileinput.min.css" rel="stylesheet" />
    <%-- <asp:ImageButton
     ID="PayPalBtn"
     runat="server"
@@ -14,6 +16,7 @@
     <script>
         var map;        
         var myCenter=new google.maps.LatLng(20.5388414,-104.0472593);
+        var paqname=  "Algo";
         //var marker=new google.maps.Marker({
         //    position:myCenter
         //});
@@ -187,7 +190,7 @@
                             </div> 
                               </div>
                             <div id="infBasic" align="center" style="display:none;">
-                                <h4><span class="label-warning control-label">Recuerda que el paquete BÁSICO tiene un costo 
+                                <h4><span class="label-warning control-label">Recuerda que el paquete BÁSICO y AVANZADO tienen un costo 
                                 y tu anuncio no será visible hasta que realices el pago correspondiente.
                                  </span></h4></div>
                             <div class="row">
@@ -197,7 +200,7 @@
                                  </div>
                                         <div class="row" id="upImg" style="display:none;">
                                <div class="col-md-offset-1 col-md-3">
-                                     <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" ClientIdMode="Static" />
+                                     <asp:FileUpload ID="FileUpload1" runat="server" accept="image/*" CssClass="form-control" ClientIdMode="Static" />
                                  </div>
         
                             </div>
@@ -243,7 +246,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                     <a href="#ModalSol" data-toggle="modal")>¿No se encuentra tu comunidad o categoria?... Click aquí</a>
+                                     <a href="#ModalSol" data-toggle="modal">¿No se encuentra tu comunidad o categoria?... Click aquí</a>
                                  </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -279,41 +282,36 @@
                                 </div>
                             </div>
                             </div>
-                            <div class="row" id="Advance" style="display:none;">
+                            <div class="row" id="Advance" style="display:none; margin-bottom:10px;">
                                 <div class="col-md-offset-1 col-md-10">
-                                    <h3>Agregar videos</h3>
-                                    <div class="row clearfix">
-			                                <table class="table table-bordered table-hover" id="tab_logic" data-toggle="table" data-url="data.json">
+                                    <h3>Agregar videos (YouTube)</h3>
+                                    <div class="row clearfix" style="width:200px;">
+			                                <table class="table table-bordered table-hover table-responsive" id="tab_logic" data-toggle="table" data-url="data.json">
 				                                <thead>
 					                                <tr >
 						                                <th class="text-center">
 							                                #
 						                                </th>
-						                                <th class="text-center">
+						                                <th class="text-center" style="width:100px;">
 							                                Nombre
 						                                </th>
-						                                <th class="text-center">
+						                                <th class="text-center" style="width:100px;">
 							                                Url
 						                                </th>
 					                                </tr>
 				                                </thead>
 				                                <tbody>
-					                                <tr id='addr0'>
-						                                <td>
-						                                1
-						                                </td>
-						                                <td>
-						                                <input type="text" name='name'  placeholder='Nombre' class="form-control"/>
-						                                </td>
-						                                <td>
-						                                <input type="text" name='url' placeholder='Url' class="form-control"/>
-						                                </td>
-					                                </tr>
-                                                    <tr id='addr1'></tr>
+					                               
 				                                </tbody>
 			                                </table>
 	                                </div>
+                                    <div style="display:none;">
 	                                <a id='delete_row' class="pull-right btn btn-default">Eliminar fila</a><a id="add_row" class="btn btn-primary pull-right">Agregar fila</a>
+                               </div>
+                                         </div>
+                                <div class="col-md-offset-1 col-md-8">
+                                    <h3>Agregar Imagenes y Audio</h3>
+                                    <asp:FileUpload ID="FileUploadMedia" runat="server" class="file" data-show-upload="false" data-show-caption="true" AllowMultiple="True" />
                                 </div>
                                 </div>
                             <div class="row">
@@ -375,6 +373,9 @@
 <script>
     var array;
     var arrayPay;
+    var arrayVideos;
+    var arrayDeleteVideos;
+    var i=1;
     $(".btnEditar").click(function () {
         alert('Editando');
         //__doPostBack('pnlRegistrarEmpresa', JSON.stringify({ INombre: $("#txtCompanyName").val(), ITelefono: $("#txtTelefono").val(), IDomicilio: $("#txtDomicilio").val(), ICorreo: $("#txtCorreo").val(), IRegion: $("#selectRegion").val(), ITag: $("#selectTag").val(), IResumen: $("#txtResumen").val(), Iimgsrc: $("#FileUpload1").val().split('\\').pop() }));
@@ -385,17 +386,45 @@
         {
             var name = $(this).find("input[name='name']").val();
             var url = $(this).find("input[name='url']").val();
-            jsonArr.push({
-                IName: name,
-                IUrl:url
-            });
+            var IId = $(this).find("label[name='idAdd']").text();
+            if(name.length > 0){
+                jsonArr.push({
+                    IName: name,
+                    IUrl:url,
+                    IId: IId,
+                    IFileType:'YouTube',
+                    IExt:'Web'
+                 });
+            }
         });
-        jsonArr.pop();
         $("#HJsonVideo").val(JSON.stringify(jsonArr));
         //alert(JSON.stringify(jsonArr));
         //});
         //__doPostBack('pnlRegistrarEmpresa', JSON.stringify({ INombre: $("#txtCompanyName").val(), ITelefono: $("#txtTelefono").val(), IDomicilio: $("#txtDomicilio").val(), ICorreo: $("#txtCorreo").val(), IRegion: $("#selectRegion").val(), ITag: $("#selectTag").val(), IResumen: $("#txtResumen").val(), Iimgsrc: $("#FileUpload1").val().split('\\').pop() }));
     });
+    $("#UpdateAdd").click(function () {
+        var jsonArr = [];
+        $('#tab_logic tbody tr').each(function() 
+        {
+            var name = $(this).find("input[name='name']").val();
+            var url = $(this).find("input[name='url']").val();
+            var IId = $(this).find("label[name='idAdd']").text();
+            if(name.length > 0){
+                jsonArr.push({
+                    IName: name,
+                    IUrl:url,
+                    IId: IId,
+                    IFileType:'YouTube',
+                    IExt:'Web'
+                });
+            }
+        });
+        $("#HJsonVideo").val(JSON.stringify(jsonArr));
+        //alert(JSON.stringify(jsonArr));
+        //});
+        //__doPostBack('pnlRegistrarEmpresa', JSON.stringify({ INombre: $("#txtCompanyName").val(), ITelefono: $("#txtTelefono").val(), IDomicilio: $("#txtDomicilio").val(), ICorreo: $("#txtCorreo").val(), IRegion: $("#selectRegion").val(), ITag: $("#selectTag").val(), IResumen: $("#txtResumen").val(), Iimgsrc: $("#FileUpload1").val().split('\\').pop() }));
+    });
+    
     $("#FileUpload1").change(function () {
         var tmppath = URL.createObjectURL(event.target.files[0]);
         $("#ImgLogo").fadeIn("fast").attr('src', tmppath);
@@ -417,32 +446,85 @@
     $(document).ready(function () {
         tableAdd();
         $("#HPaq").val(1);
-        var i=1;
-        $("#add_row").click(function(){
-            $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name' type='text' placeholder='Nombre' class='form-control input-md'  /> </td><td><input  name='url' type='text' placeholder='Url'  class='form-control input-md'></td>");
-
-            $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-            i++; 
-        });
-        $("#delete_row").click(function(){
-            if(i>1){
-                $("#addr"+(i-1)).html('');
-                i--;
-            }
-        });
+        for(var cont=0;cont<10;cont++){
+            $("#add_row").click();
+        }
     });
-    function getvideos(){
-        $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name' type='text' placeholder='Nombre' class='form-control input-md'  /> </td><td><input  name='url' type='text' placeholder='Url'  class='form-control input-md'></td>");
+    $("#add_row").click(function(){
         var table=$("#tab_logic").find('tbody');
+        table.append($('<tr>')
+                        .append($('<td>').append(i))
+                        .append($('<td>')
+                            .append($('<input>').attr('name','name')
+                                                .attr('placeholder','Nombre')
+                                                .attr('class','form-control input-md')))
+                          .append($('<td>')
+                            .append($('<input>').attr('name','url')
+                                                        .attr('placeholder','Url')
+                                                        .attr('class','form-control input-md')))
+                        .append($('<td>')
+                                .attr('style','display:none;')
+                                .append($('<label>').attr('name','idAdd').text(0)))
+
+                );
+        i++; 
+    });
+    $("#delete_row").click(function(){
+        if(i==2){
+            i=1;
+            $('#tab_logic tbody tr:last').remove();
+            var table=$("#tab_logic").find('tbody');
+            table.append($('<tr>')
+                            .append($('<td>').append(i))
+                            .append($('<td>')
+                                .append($('<input>').attr('name','name')
+                                                    .attr('placeholder','Nombre')
+                                                    .attr('class','form-control input-md')))
+                                .append($('<td>')
+                                .append($('<input>').attr('name','url')
+                                                            .attr('placeholder','Url')
+                                                            .attr('class','form-control input-md')))
+                                .append($('<td>')
+                                .attr('style','display:none;')
+                                .append($('<label>').attr('name','idAdd').text(0)))
+                    );
+            i++;
+        }
+        if(i>2){
+            $('#tab_logic tbody tr:last').remove();
+            i--;
+        }
+    });
+    function getvideos(idAdd){
+        arrayVideos = <%=this.jsonVideos%>;
         i=1;
+        var cont=0;
+        var table=$("#tab_logic").find('tbody');
         table.find('tr').remove();
-        //table.append($('<tr>')
-        //            .append($('<td>').append(i))
-        //            .append($('<td>')
-        //                .append($('<input>')
-                            
-        //            ))
-        //);
+        for(;cont<arrayVideos.length;cont++){
+            if(arrayVideos[cont].IIdAdd==idAdd){ 
+                table.append($('<tr>')
+                        .append($('<td>').append(i))
+                        .append($('<td>')
+                            .append($('<input>').attr('name','name')
+                                                .attr('placeholder','Nombre')
+                                                .attr('class','form-control input-md')
+                                                .val(arrayVideos[cont].IName)))
+                            .append($('<td>')
+                            .append($('<input>').attr('name','url')
+                                                        .attr('placeholder','Url')
+                                                        .attr('class','form-control input-md')
+                                                        .val(arrayVideos[cont].IUrl)))
+                            .append($('<td>')
+                                .attr('style','display:none;')
+                               .append($('<label>').attr('name','idAdd').text(arrayVideos[cont].IId)))
+                );
+                i++;
+            }
+        }
+        while(i<=10){
+            $("#add_row").click();
+        }
     }
     function tableAdd() {
         array = <%=this.json%>;
@@ -544,7 +626,7 @@
         $(".modal-content #UpdateAdd").show();
         resizeMap();
         loadCoord();
-        //getvideos();
+        getvideos($("#HId").val());
     }
     function pagos(sender){
         $("#paycode").hide();
@@ -616,19 +698,24 @@
             if($(this).attr("value")==1){
                 $("#Basic").hide();
                 $("#upImg").hide();
-                $("#infBasic").hide(); 
+                $("#infBasic").hide();
+                $("#Advance").hide();
                 var control = $("#FileUpload1");
                 control.replaceWith( control = control.clone( true ) );
                 $("#ImgLogo").fadeIn("fast").attr('src', 'Images/img_no_disp_es.jpg');
             }if($(this).attr("value")==2){
+                
                 $("#Basic").show();
                 $("#upImg").show();
                 $("#infBasic").show();
+                
             }if($(this).attr("value")==3){
+                paqname="AVANZADO";
                 $("#Basic").show();
                 $("#upImg").show();
                 $("#infBasic").show();
                 $("#Advance").show();
+               
             }
             $("#HPaq").val($(this).attr("value"));
             resizeMap();
@@ -639,5 +726,4 @@
     });
     
 </script>
-
 </asp:Content>

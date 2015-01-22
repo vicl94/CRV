@@ -172,6 +172,11 @@
     <Content Include="Content\semantic.css" />
     <Content Include="Content\semantic.min.css" />
     <Content Include="Content\semantic.site.css" />
+    <Content Include="css\bootstrap-image-gallery.css" />
+    <Content Include="css\bootstrap-image-gallery.min.css" />
+    <Content Include="css\demo.css" />
+    <Content Include="css\fileinput.css" />
+    <Content Include="css\fileinput.min.css" />
     <Content Include="css\mediaelementplayer.css" />
     <Content Include="css\video-js.css" />
     <Content Include="css\video-js.min.css" />
@@ -220,6 +225,13 @@
     <Content Include="Images\img_no_disp_es.jpg" />
     <Content Include="Images\Untitled-1.jpg" />
     <Content Include="MisAnuncios.aspx" />
+    <Content Include="Scripts\bootstrap-image-gallery.js" />
+    <Content Include="Scripts\bootstrap-image-gallery.min.js" />
+    <Content Include="Scripts\demo.js" />
+    <Content Include="Scripts\dropzone.js" />
+    <Content Include="Scripts\fileinput.js" />
+    <Content Include="Scripts\fileinput.min.js" />
+    <Content Include="Scripts\style.css" />
     <Content Include="videoconverter\NReco.VideoConverter.dll" />
     <Content Include="Registro.aspx" />
     <Content Include="Scripts\bootbox.js" />
@@ -478,6 +490,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AllPages\AllPages.csproj">

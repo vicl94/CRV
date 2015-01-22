@@ -44,16 +44,20 @@ namespace Management
         {
             return DataAccessObj.getCompanyById(Id);
         }
-        public List<Video> getVideosByAdd(int Id)
+        public List<File> getVideosByAdd(int Id)
         {
             return DataAccessObj.getVideosByAdd(Id);
+        }
+        public List<File> getFilesByAdd(int Id)
+        {
+            return DataAccessObj.getFilesByAdd(Id);
         }
         
         public List<Pagos> getPaymentsByUser(string IdUser)
         {
             return DataAccessObj.getPaymentsByAdd(IdUser);
         }
-        public List<Video> getVideosByUser(string IdUser)
+        public List<File> getVideosByUser(string IdUser)
         {
             return DataAccessObj.getVideosByUser(IdUser);
         }

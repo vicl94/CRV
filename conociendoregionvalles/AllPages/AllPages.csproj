@@ -71,7 +71,7 @@
     <Compile Include="Usuario.cs" />
     <Compile Include="SystemClass.cs" />
     <Compile Include="Tags.cs" />
-    <Compile Include="Video.cs" />
+    <Compile Include="File.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">

@@ -40,7 +40,8 @@ namespace DataAccess
             lastid = int.Parse(rdr["LastId"].ToString());
             conn.Close();
             if(Company.IPack==3){
-                insertVideos(Company, lastid);
+                insertFiles(Company, lastid,Company.IVideos);
+                insertFiles(Company, lastid, Company.IFiles);
             }
             return estado;
         }
@@ -60,6 +61,43 @@ namespace DataAccess
                 rdr = cmd.ExecuteReader();
                 conn.Close();
             }
+        }
+        public void insertFiles(Empresa Company, int lastid, List<File> files)
+        {
+            for (int cont = 0; cont < files.Count; cont++)
+            {
+                SqlDataReader rdr = null;
+                string connStr = ConfigurationManager.ConnectionStrings["ConnDataBase"].ConnectionString;
+                SqlConnection conn = new SqlConnection(connStr);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("sp_InsertNewFile", conn);
+                cmd.Parameters.AddWithValue("@IdUser", Company.IUserId);
+                cmd.Parameters.AddWithValue("@IdAdd", lastid);
+                cmd.Parameters.AddWithValue("@Url", files[cont].IUrl);
+                cmd.Parameters.AddWithValue("@Name", files[cont].IName);
+                cmd.Parameters.AddWithValue("@Type", files[cont].IFileType);
+                cmd.Parameters.AddWithValue("@Ext", files[cont].IExt);
+                cmd.CommandType = CommandType.StoredProcedure;
+                rdr = cmd.ExecuteReader();
+                conn.Close();
+            }
+        }
+        public void insertFile(File video, int IdAdd)
+        {
+                SqlDataReader rdr = null;
+                string connStr = ConfigurationManager.ConnectionStrings["ConnDataBase"].ConnectionString;
+                SqlConnection conn = new SqlConnection(connStr);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("sp_InsertNewFile", conn);
+                cmd.Parameters.AddWithValue("@IdUser", video.IIdUser);
+                cmd.Parameters.AddWithValue("@IdAdd", IdAdd);
+                cmd.Parameters.AddWithValue("@Url", video.IUrl);
+                cmd.Parameters.AddWithValue("@Name", video.IName);
+                cmd.Parameters.AddWithValue("@Type", video.IFileType);
+                cmd.Parameters.AddWithValue("@Ext", video.IExt);
+                cmd.CommandType = CommandType.StoredProcedure;
+                rdr = cmd.ExecuteReader();
+                conn.Close();
         }
         public int EditAdd(Empresa Company)
         {
@@ -85,9 +123,40 @@ namespace DataAccess
             rdr = cmd.ExecuteReader();
             rdr.Read();
             estado = int.Parse(rdr["ESTADO"].ToString());
-            
             conn.Close();
+            for (int cont = 0;cont<Company.IVideos.Count;cont++ )
+            {
+                if (Company.IVideos[cont].IId==0)
+                {
+                    Company.IVideos[cont].IIdUser = Company.IUserId;
+                    insertFile(Company.IVideos[cont], Company.IId);
+                }
+                else
+                {
+                    editFile(Company.IVideos[cont]);
+                }
+            }
+            if (Company.IFiles.Count!=0)
+            {
+                insertFiles(Company, Company.IId, Company.IFiles);
+            }
             return estado;
+        }
+        public void editFile(File File)
+        {
+                SqlDataReader rdr = null;
+                string connStr = ConfigurationManager.ConnectionStrings["ConnDataBase"].ConnectionString;
+                SqlConnection conn = new SqlConnection(connStr);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("sp_UpdateFileById", conn);
+                cmd.Parameters.AddWithValue("@IdVideo", File.IId);
+                cmd.Parameters.AddWithValue("@Name", File.IName);
+                cmd.Parameters.AddWithValue("@Url", File.IUrl);
+                cmd.Parameters.AddWithValue("@Type", File.IFileType);
+                cmd.Parameters.AddWithValue("@Ext", File.IExt);
+                cmd.CommandType = CommandType.StoredProcedure;
+                rdr = cmd.ExecuteReader();
+                conn.Close();
         }
         public void deleteAdd(int add)
         {
@@ -130,9 +199,9 @@ namespace DataAccess
             conn.Close();
             return temp;
         }
-        public List<Video> getVideosByAdd(int Id)
+        public List<File> getVideosByAdd(int Id)
         {
-            List<Video> listVideos = new List<Video>();
+            List<File> listVideos = new List<File>();
             SqlDataReader rdr = null;
             string connStr = ConfigurationManager.ConnectionStrings["ConnDataBase"].ConnectionString;
             SqlConnection conn = new SqlConnection(connStr);
@@ -143,17 +212,46 @@ namespace DataAccess
             rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                Video temp = new Video();
+                File temp = new File();
                 temp.IId = int.Parse(rdr["Id"].ToString());
                 temp.IUrl = rdr["Url"].ToString();
                 temp.IName = rdr["Name"].ToString();
                 temp.IIdUser = rdr["IdUser"].ToString();
                 temp.IIdAdd = int.Parse(rdr["IdAdd"].ToString());
+                temp.IFileType = rdr["FileType"].ToString();
+                temp.IExt = rdr["Ext"].ToString();
                 listVideos.Add(temp);
             }
             conn.Close();
             return listVideos;
         }
+        public List<File> getFilesByAdd(int Id)
+        {
+            List<File> listFiles = new List<File>();
+            SqlDataReader rdr = null;
+            string connStr = ConfigurationManager.ConnectionStrings["ConnDataBase"].ConnectionString;
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("sp_GetFilesByAdd", conn);
+            cmd.Parameters.AddWithValue("@IdAdd", Id);
+            cmd.CommandType = CommandType.StoredProcedure;
+            rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                File temp = new File();
+                temp.IId = int.Parse(rdr["Id"].ToString());
+                temp.IUrl = rdr["Url"].ToString();
+                temp.IName = rdr["Name"].ToString();
+                temp.IIdUser = rdr["IdUser"].ToString();
+                temp.IIdAdd = int.Parse(rdr["IdAdd"].ToString());
+                temp.IFileType = rdr["FileType"].ToString();
+                temp.IExt = rdr["Ext"].ToString();
+                listFiles.Add(temp);
+            }
+            conn.Close();
+            return listFiles;
+        }
+        
         public List<Pagos> getPaymentsByAdd(string IdUser)
         {
             
@@ -183,10 +281,10 @@ namespace DataAccess
             conn.Close();
             return ListaPagos;
         }
-        public List<Video> getVideosByUser(string IdUser)
+        public List<File> getVideosByUser(string IdUser)
         {
 
-            List<Video> ListaVideos = new List<Video>();
+            List<File> ListaVideos = new List<File>();
             SqlDataReader rdr = null;
             string connStr = ConfigurationManager.ConnectionStrings["ConnDataBase"].ConnectionString;
             SqlConnection conn = new SqlConnection(connStr);
@@ -197,12 +295,13 @@ namespace DataAccess
             rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                Video temp = new Video();
+                File temp = new File();
                 temp.IId = int.Parse(rdr["Id"].ToString());
                 temp.IUrl = rdr["Url"].ToString();
                 temp.IName = rdr["Name"].ToString();
                 temp.IIdUser = rdr["IdUser"].ToString();
                 temp.IIdAdd = int.Parse(rdr["IdAdd"].ToString());
+                temp.IFileType = rdr["FileType"].ToString();
                 ListaVideos.Add(temp);
             }
             conn.Close();

@@ -8,3 +8,13 @@ C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Man
 C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\obj\Debug\Management.csprojResolveAssemblyReference.cache
 C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\obj\Debug\Management.dll
 C:\Users\Sergio\documents\visual studio 2013\Projects\conociendoregionvalles\Management\obj\Debug\Management.pdb
+C:\Users\Sergio\Desktop\CRV\conociendoregionvalles\Management\bin\Management.dll.config
+C:\Users\Sergio\Desktop\CRV\conociendoregionvalles\Management\bin\Management.dll
+C:\Users\Sergio\Desktop\CRV\conociendoregionvalles\Management\bin\Management.pdb
+C:\Users\Sergio\Desktop\CRV\conociendoregionvalles\Management\bin\AllPages.dll
+C:\Users\Sergio\Desktop\CRV\conociendoregionvalles\Management\bin\DataAccess.dll
+C:\Users\Sergio\Desktop\CRV\conociendoregionvalles\Management\bin\AllPages.pdb
+C:\Users\Sergio\Desktop\CRV\conociendoregionvalles\Management\bin\DataAccess.pdb
+C:\Users\Sergio\Desktop\CRV\conociendoregionvalles\Management\obj\Debug\Management.csprojResolveAssemblyReference.cache
+C:\Users\Sergio\Desktop\CRV\conociendoregionvalles\Management\obj\Debug\Management.dll
+C:\Users\Sergio\Desktop\CRV\conociendoregionvalles\Management\obj\Debug\Management.pdb

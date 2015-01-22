@@ -2,6 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDo3B1SIUzUz6NBeUpQYAglsNFbac_ip7o"></script>--%>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link href="css/bootstrap-image-gallery.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap-image-gallery.js"></script>
     <script>
         // 2. This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
@@ -17,7 +20,7 @@
             player = new YT.Player('player', {
                 height: '315',
                 width: '420',
-                videoId: 'M7lc1UVf-VE',
+                videoId: 'o322TuoOcVA',
                 events: {
                     'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
@@ -64,7 +67,7 @@
         var map;
         var myCenter = new google.maps.LatLng(20.5388414, -104.0472593);
         var latlng = new google.maps.LatLng(20.5388414, -104.0472593);;
-        var jsonVideos;
+        var jsonFiles;
         //var marker=new google.maps.Marker({
         //    position:myCenter
         //});
@@ -123,16 +126,27 @@
         $(document).ready(function () {
             loadCoord();
             autoheight($("#txtMoreSummary"));
-            loadVideos();
+            loadFiles();
         });
-        function loadVideos() {
-            jsonVideos = <%=this.jsonVideos%>;
+        function loadFiles() {
+            jsonFiles = <%=this.jsonFiles%>;
             var tableVideos=$("#videoTable").find('tbody');
-            for(var c=0;c<jsonVideos.length;c++){
+            for(var c=0;c<jsonFiles.length;c++){
+                if(jsonFiles[c].IFileType=='YouTube'){
                 tableVideos.append($('<tr>')
-                   .append($('<td>').attr('onclick','changevideo("'+jsonVideos[c].IUrl+'")')
-                   .append($('<label>').attr('onclick','changevideo("'+jsonVideos[c].IUrl+'")').text(jsonVideos[c].IName))));
+                   .append($('<td>').attr('onclick','changevideo("'+jsonFiles[c].IUrl+'")')
+                   .append($('<label>').attr('onclick','changevideo("'+jsonFiles[c].IUrl+'")').text(jsonFiles[c].IName))));
+                }
+                if(jsonFiles[c].IFileType=='Image'){
+                    $('#divImages').prepend(' <a href="'+jsonFiles[c].IUrl+jsonFiles[c].IExt+'"data-gallery><img class="imagecontainer" src="'+jsonFiles[c].IUrl+jsonFiles[c].IExt+'" /></a>')
+                    //$('#divImages').prepend('<img class="imagecontainer" src="'+jsonFiles[c].IUrl+jsonFiles[c].IExt+'" />')
+                }
+                if(jsonFiles[c].IFileType=='Audio'){
+                    $('#divAudios').prepend('<audio controls="controls" src="'+jsonFiles[c].IUrl+jsonFiles[c].IExt+'"></audio>')
+                    //$('#divImages').prepend('<img class="imagecontainer" src="'+jsonFiles[c].IUrl+jsonFiles[c].IExt+'" />')
+                }
             }
+
         }
         function autoheight(a) {
             if (!$(a).prop('scrollTop')) {
@@ -213,6 +227,7 @@
     </div>
     <div class="ui segment" runat="server" id="divAdvance">
         <div class="row">
+            <div align="center"><h3>Videos</h3></div>
        <div class="col-md-5"> 
         <div id="player"></div>
            </div>
@@ -226,7 +241,64 @@
             </table>
          </div>
             </div>
+         <div class="row">
+             <div align="center"><h3>Galeria de imagenes</h3></div>
+             
+            <div class="col-md-10" id="divImages"> 
+                <div id="links">
+                    
+                </div>
+           </div>
+             </div>
+        <div class="row">
+             <div align="center"><h3>Audios</h3></div>
+             <div class="col-md-10" id="divAudios"> 
+
+            </div>
+         </div>
+        
     </div>
+    
+<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation and button states -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="Scripts/bootstrap-image-gallery.js"></script>
+<script src="Scripts/demo.js"></script>
 <asp:HiddenField ID="HLatitude" runat="server" ClientIdMode="Static" />
 <asp:HiddenField ID="HLongitude" runat="server" ClientIdMode="Static" />
 </asp:Content>
